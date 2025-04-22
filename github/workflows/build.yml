@@ -1,0 +1,21 @@
+name: Build iSH App
+on: [push]  # Builds when you push code
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Uses a free cloud machine
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Downloads your code
+      - name: Install dependencies
+        run: |  # Installs tools (customize as needed)
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+      - name: Build
+        run: make  # Replace this with YOUR build command later
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: |  # Files to save (e.g., .ipa, .zip)
+            *.ipa
+            *.dSYM.zip
